@@ -42,14 +42,20 @@ public class UserService {
      * @param pageNum
      * @param sortField
      * @param sortDir
+     * @param keyword
      * @return
      */
-    public Page<User> listByPage(int pageNum, String sortField, String sortDir){
+    public Page<User> listByPage(int pageNum, String sortField, String sortDir,String keyword){
         Sort sort = Sort.by(sortField);
 
         sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
 
         Pageable pageable = PageRequest.of(pageNum - 1,USER_PER_PAGE, sort );
+
+        if(keyword != null){
+            return userRepository.findAll(keyword,pageable);
+        }
+
         return userRepository.findAll(pageable);
     }
 
