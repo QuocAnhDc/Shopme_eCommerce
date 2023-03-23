@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class UserController {
     @GetMapping("/users/page/{pageNum}")
     public String listByPage(@PathVariable(name = "pageNum")int pageNum, Model model,
                              @Param("sortField") String sortField,@Param("sortDir") String sortDir,
-                                @Param("keyword") String keyword){
+                                @Param("keyword") String keyword    ){
         Page<User> page = userService.listByPage(pageNum,sortField,sortDir,keyword);
         List<User> listUsers = page.getContent();
 
@@ -106,7 +107,13 @@ public class UserController {
 
         //userService.save(user);
         redirectAttributes.addFlashAttribute("message","The user has been saved successfully");
-        return "redirect:/users";
+
+        return getRedirectURLtoAffectedUser(user);
+    }
+
+    private String getRedirectURLtoAffectedUser(User user){
+        String firstPartOfEmail = user.getEmail().split("@")[0];
+        return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword="+firstPartOfEmail;
     }
 
     @GetMapping("/users/edit/{id}")
@@ -149,6 +156,13 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message", message);
 
         return "redirect:/users";
+    }
+
+    @GetMapping("/users/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<User> listUsers = userService.listAll();
+        UserCsvExporter exporter = new UserCsvExporter();
+        exporter.export(listUsers,response);
     }
 
 }
