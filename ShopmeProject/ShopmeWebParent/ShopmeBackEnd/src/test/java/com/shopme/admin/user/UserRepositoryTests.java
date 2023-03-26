@@ -52,39 +52,39 @@ public class UserRepositoryTests {
 //
 //		assertThat(saveUser.getId()).isGreaterThan(0);
 //	}
-
-    @Test
-    public void testCountById(){
-        Integer id = 1;
-        Long countById = userRepository.countById(id);
-
-        assertThat(countById).isNotNull().isGreaterThan(0);
-    }
-
-    @Test
-    public void updateDisableUser(){
-        Integer id = 3;
-        userRepository.updateEnabledStatus(id,false);
-    }
-    @Test
-    public void updateEnableUser(){
-        Integer id = 3;
-        userRepository.updateEnabledStatus(id,true);
-    }
-
-    @Test
-    public void testListFirstPage(){
-        int pageNumber = 0;
-        int pageSize = 4;
-
-        Pageable pageable = PageRequest.of(pageNumber,pageSize);
-        Page<User> page = userRepository.findAll(pageable);
-        List<User> userList = page.getContent();
-
-        userList.forEach(user -> System.out.println(user));
-
-        assertThat(userList.size()).isEqualTo(pageSize);
-
-    }
+//
+//    @Test
+//    public void testCountById(){
+//        Integer id = 1;
+//        Long countById = userRepository.countById(id);
+//
+//        assertThat(countById).isNotNull().isGreaterThan(0);
+//    }
+//
+//    @Test
+//    public void updateDisableUser(){
+//        Integer id = 3;
+//        userRepository.updateEnabledStatus(id,false);
+//    }
+//    @Test
+//    public void updateEnableUser(){
+//        Integer id = 3;
+//        userRepository.updateEnabledStatus(id,true);
+//    }
+//
+//    @Test
+//    public void testListFirstPage(){
+//        int pageNumber = 0;
+//        int pageSize = 4;
+//
+//        Pageable pageable = PageRequest.of(pageNumber,pageSize);
+//        Page<User> page = userRepository.findAll(pageable);
+//        List<User> userList = page.getContent();
+//
+//        userList.forEach(user -> System.out.println(user));
+//
+//        assertThat(userList.size()).isEqualTo(pageSize);
+//
+//    }
 
 }

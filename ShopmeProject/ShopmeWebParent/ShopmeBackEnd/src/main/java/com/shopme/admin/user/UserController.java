@@ -1,6 +1,9 @@
 package com.shopme.admin.user;
 
 import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.user.exportFile.UserCsvExporter;
+import com.shopme.admin.user.exportFile.UserExcelExporter;
+import com.shopme.admin.user.exportFile.UserPDFExporter;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +50,6 @@ public class UserController {
         Page<User> page = userService.listByPage(pageNum,sortField,sortDir,keyword);
         List<User> listUsers = page.getContent();
 
-//        System.out.println("pagenum =" +pageNum);
-//        System.out.println("total elements =" +page.getTotalElements());
-//        System.out.println("total pages =" +page.getTotalPages());
 
         long startCount = (pageNum -1) * UserService.USER_PER_PAGE + 1;
         long endCount = startCount + UserService.USER_PER_PAGE -1;
@@ -165,4 +165,18 @@ public class UserController {
         exporter.export(listUsers,response);
     }
 
+    @GetMapping("/users/export/excel")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        List<User> listUsers = userService.listAll();
+
+        UserExcelExporter exporter = new UserExcelExporter();
+        exporter.export(listUsers,response);
+    }
+    @GetMapping("/users/export/pdf")
+    public void exportToPDF(HttpServletResponse response) throws IOException {
+        List<User> listUsers = userService.listAll();
+
+        UserPDFExporter exporter = new UserPDFExporter();
+        exporter.export(listUsers,response);
+    }
 }
