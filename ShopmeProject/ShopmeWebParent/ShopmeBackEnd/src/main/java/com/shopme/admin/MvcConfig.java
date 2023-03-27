@@ -1,7 +1,6 @@
 package com.shopme.admin;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,8 +16,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
         String userPhotosPath = userPhotosDir.toFile().getAbsolutePath();
 
-        registry.addResourceHandler("/"+dirName+"/**").addResourceLocations("file:/"+ userPhotosPath+"/");
-//        registry.addResourceHandler("/"+dirName+"/**").addResourceLocations("file:"+ userPhotosPath+"/");
+//        registry.addResourceHandler("/"+dirName+"/**").addResourceLocations("file:/"+ userPhotosPath+"/");
+        registry.addResourceHandler("/"+dirName+"/**").addResourceLocations("file:"+ userPhotosPath+"/");
 
     }
 }
