@@ -53,7 +53,7 @@ public class UserExcelExporter extends AbstractExporter {
     }
 
     public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
-        super.setResponseHeader(response,"application/octet-stream", ".xlsx");
+        super.setResponseHeader(response,"application/octet-stream", ".xlsx","user_");
 
         writeHeaderLine();
         writeDataLines(listUsers);
@@ -80,7 +80,7 @@ public class UserExcelExporter extends AbstractExporter {
             createCell(row,columnIndex++,user.getFirstName(),cellStyle);
             createCell(row,columnIndex++,user.getLastName(),cellStyle);
             createCell(row,columnIndex++,user.getRoles().toString(),cellStyle);
-            createCell(row,columnIndex++,user.isEnabled(),cellStyle);
+            createCell(row,columnIndex,user.isEnabled(),cellStyle);
         }
     }
 }
