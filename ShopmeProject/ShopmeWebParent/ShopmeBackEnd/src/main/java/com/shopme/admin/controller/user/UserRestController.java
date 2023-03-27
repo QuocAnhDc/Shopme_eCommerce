@@ -1,5 +1,6 @@
-package com.shopme.admin.user;
+package com.shopme.admin.controller.user;
 
+import com.shopme.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;

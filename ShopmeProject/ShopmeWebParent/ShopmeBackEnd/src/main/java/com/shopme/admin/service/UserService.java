@@ -1,5 +1,8 @@
-package com.shopme.admin.user;
+package com.shopme.admin.service;
 
+import com.shopme.admin.repository.RoleRepository;
+import com.shopme.admin.repository.UserRepository;
+import com.shopme.admin.exceptionHandel.UserNotFoundException;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

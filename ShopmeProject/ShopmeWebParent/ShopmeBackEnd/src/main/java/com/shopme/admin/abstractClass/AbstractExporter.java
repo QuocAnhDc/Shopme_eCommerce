@@ -1,4 +1,4 @@
-package com.shopme.admin.user;
+package com.shopme.admin.abstractClass;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

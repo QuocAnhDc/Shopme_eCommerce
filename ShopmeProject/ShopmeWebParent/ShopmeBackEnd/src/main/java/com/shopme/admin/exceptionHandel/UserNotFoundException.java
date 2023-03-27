@@ -1,4 +1,4 @@
-package com.shopme.admin.user;
+package com.shopme.admin.exceptionHandel;
 
 public class UserNotFoundException extends Throwable {
     public UserNotFoundException(String message) {
