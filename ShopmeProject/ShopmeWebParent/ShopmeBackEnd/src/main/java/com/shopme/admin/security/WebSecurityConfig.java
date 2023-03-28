@@ -48,9 +48,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .permitAll()
                 .and()
-                .logout().permitAll();
+                .logout().permitAll()
+                .and()
+                    .rememberMe()
+                    .rememberMeParameter("remember-me")
+                    .key("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789")
+                    .tokenValiditySeconds(7*24*60*60);
     }
-
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/images/**","/js/**","/webjars/**");
