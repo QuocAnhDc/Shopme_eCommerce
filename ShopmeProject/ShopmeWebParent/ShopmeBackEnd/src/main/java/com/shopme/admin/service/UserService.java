@@ -35,21 +35,38 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * getByEmail
+     * @param email
+     * email of user
+     * @return
+     * return a user has email
+     */
     public User getByEmail(String email){
         return userRepository.getUserByEmail(email);
     }
 
+    /**
+     * listAll
+     * @return
+     * return a list user sort by field firstName
+     */
     public List<User> listAll(){
         return (List<User>) userRepository.findAll(Sort.by("firstName").ascending());
     }
 
     /**
-     *
+     *listByPage
      * @param pageNum
+     * current page
      * @param sortField
+     * sort entity like field
      * @param sortDir
+     * sort entity like dir
      * @param keyword
+     * sort entity if entity has keyword
      * @return
+     * a page has list of user
      */
     public Page<User> listByPage(int pageNum, String sortField, String sortDir,String keyword){
         Sort sort = Sort.by(sortField);
@@ -65,10 +82,22 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
+    /**
+     * listRoles
+     * @return
+     * List roles in database
+     */
     public List<Role> listRoles(){
         return (List<Role>) roleRepository.findAll();
     }
 
+    /**
+     * save
+     * @param user
+     * user entity
+     * @return
+     * save user in database
+     */
     public User save(User user){
         boolean isUpdatingUser = (user.getId() != null);
         if(isUpdatingUser){
@@ -85,6 +114,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * updateAccount
+     * @param userInForm
+     * get data user in user form
+     * @return
+     * save user from user form
+     */
     public User updateAccount(User userInForm){
         User userInDB = userRepository.findById(userInForm.getId()).get();
         if(!userInForm.getPassword().isEmpty()){
